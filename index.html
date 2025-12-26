@@ -5,7 +5,6 @@
 <title>Thank You 🤍</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- Elegant cursive font -->
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
@@ -19,54 +18,47 @@ body {
   display:flex;
   align-items:center;
   justify-content:center;
-  overflow:hidden;
 }
 
 .container {
   background: rgba(255,255,255,0.06);
   border-radius: 24px;
-  padding: 44px;
+  padding: 42px;
   text-align: center;
   width: 92%;
   max-width: 560px;
   box-shadow: 0 0 45px rgba(255,255,255,0.18);
   backdrop-filter: blur(16px);
-  animation: float 7s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
 }
 
 h1 {
-  font-size: 2.5rem;
-  margin-bottom: 18px;
-  text-shadow: 0 0 14px rgba(255,255,255,0.75);
+  font-size: 2.4rem;
+  margin-bottom: 16px;
 }
 
 #typing {
   font-size: 1.35rem;
-  line-height: 1.9;
-  min-height: 160px;
-  margin: 22px 0;
-  opacity: 0.96;
+  line-height: 1.6;
+  margin-top: 12px;
 }
 
 .heart {
-  font-size: 2.4rem;
-  margin-top: 20px;
-  animation: pulse 2s infinite;
+  font-size: 2.2rem;
+  margin-top: 18px;
 }
 
-@keyframes pulse {
-  0% { transform: scale(1); opacity: 0.7; }
-  50% { transform: scale(1.15); opacity: 1; }
-  100% { transform: scale(1); opacity: 0.7; }
+.portfolio-link {
+  margin-top: 26px;
+  display: inline-block;
+  font-size: 1.1rem;
+  color: #ffffff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.5);
+  padding-bottom: 2px;
 }
 
 .footer {
-  margin-top: 28px;
+  margin-top: 22px;
   font-size: 1rem;
   opacity: 0.7;
 }
@@ -82,24 +74,15 @@ h1 {
 
   <div class="heart">🤍</div>
 
+  <a class="portfolio-link" href="#" title="Portfolio coming soon">
+    View my portfolio →
+  </a>
+
   <div class="footer">— With love, Sara</div>
 </div>
 
-<!-- Confetti -->
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-<!-- Background ambience -->
-<audio id="bgm" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2023/03/15/audio_1f85d1f5d7.mp3">
-</audio>
-
-<!-- Whisper voice -->
-<audio id="whisper">
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/24/audio_2b5bbebc1d.mp3">
-</audio>
-
 <script>
-// Name from URL (?name=Anu)
+// Name from URL
 const params = new URLSearchParams(window.location.search);
 const name = params.get("name");
 
@@ -107,10 +90,7 @@ if (name) {
   document.getElementById("greeting").innerText = `Thank You, ${name} 🤍`;
 }
 
-// Emotional message
-const message = `Thank you so much${name ? " " + name : ""} for wishing me on my birthday.
-It genuinely means a lot to me.
-
+const message = `Thank you so much${name ? " " + name : ""} for wishing me on my birthday. It genuinely means a lot to me.
 Your message wasn’t just a wish — it was warmth, kindness, and love that I’ll always remember.
 I’m truly grateful you took a moment to think of me 🤍`;
 
@@ -118,34 +98,12 @@ let i = 0;
 function typeEffect() {
   if (i < message.length) {
     document.getElementById("typing").innerHTML +=
-      message.charAt(i) === "\n" ? "<br><br>" : message.charAt(i);
+      message.charAt(i) === "\n" ? "<br>" : message.charAt(i);
     i++;
-    setTimeout(typeEffect, 45);
+    setTimeout(typeEffect, 35);
   }
 }
 typeEffect();
-
-// Confetti burst
-setTimeout(() => {
-  confetti({
-    particleCount: 120,
-    spread: 90,
-    colors: ['#ffffff']
-  });
-}, 1800);
-
-// Audio interaction (required click)
-document.body.addEventListener("click", () => {
-  const music = document.getElementById("bgm");
-  const whisper = document.getElementById("whisper");
-
-  music.volume = 0.12;
-  whisper.volume = 0.3;
-
-  music.play();
-  setTimeout(() => whisper.play(), 2500);
-}, { once: true });
-
 </script>
 
 </body>

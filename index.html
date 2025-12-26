@@ -47,16 +47,6 @@ h1 {
   margin-top: 18px;
 }
 
-.portfolio-link {
-  margin-top: 26px;
-  display: inline-block;
-  font-size: 1.1rem;
-  color: #ffffff;
-  text-decoration: none;
-  border-bottom: 1px solid rgba(255,255,255,0.5);
-  padding-bottom: 2px;
-}
-
 .footer {
   margin-top: 22px;
   font-size: 1rem;
@@ -74,10 +64,6 @@ h1 {
 
   <div class="heart">🤍</div>
 
-  <a class="portfolio-link" href="#" title="Portfolio coming soon">
-    View my portfolio →
-  </a>
-
   <div class="footer">— With love, Sara</div>
 </div>
 
@@ -90,15 +76,13 @@ if (name) {
   document.getElementById("greeting").innerText = `Thank You, ${name} 🤍`;
 }
 
-const message = `Thank you so much${name ? " " + name : ""} for wishing me on my birthday. It genuinely means a lot to me.
-Your message wasn’t just a wish — it was warmth, kindness, and love that I’ll always remember.
-I’m truly grateful you took a moment to think of me 🤍`;
+// Message with single-line spacing
+const message = `Thank you so much${name ? " " + name : ""} for wishing me on my birthday. It genuinely means a lot to me. Your message wasn’t just a wish — it was warmth, kindness, and love that I’ll always remember. I’m truly grateful you took a moment to think of me 🤍`;
 
 let i = 0;
 function typeEffect() {
   if (i < message.length) {
-    document.getElementById("typing").innerHTML +=
-      message.charAt(i) === "\n" ? "<br>" : message.charAt(i);
+    document.getElementById("typing").innerHTML += message.charAt(i);
     i++;
     setTimeout(typeEffect, 35);
   }

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Thank You ✨</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  height:100vh;
+  background:radial-gradient(circle at top, #0f2027, #000);
+  font-family:'Orbitron', sans-serif;
+  color:#00f7ff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+.container {
+  background:rgba(0,0,0,0.6);
+  border-radius:20px;
+  padding:40px;
+  text-align:center;
+  width:90%;
+  max-width:520px;
+  box-shadow:0 0 30px #00f7ff44;
+  backdrop-filter:blur(12px);
+  animation:float 6s ease-in-out infinite;
+}
+@keyframes float {
+  0%,100% { transform:translateY(0); }
+  50% { transform:translateY(-10px); }
+}
+h1 { font-size:2rem; margin-bottom:10px; text-shadow:0 0 15px #00f7ff; }
+#typing { font-size:1.1rem; min-height:70px; margin:20px 0; color:#fff; }
+.countdown { font-size:1rem; margin:15px 0; color:#00ffaa; }
+.qr { margin-top:20px; }
+.footer { margin-top:20px; font-size:0.8rem; opacity:0.7; }
+</style>
+</head>
+
+<body>
+<div class="container">
+  <h1>✨ Thank You ✨</h1>
+  <div id="typing"></div>
+  <div class="countdown" id="countdown"></div>
+  <div class="qr"><img id="qrImg" alt="QR Code" /></div>
+  <div class="footer">— Sara | 5 January 💙</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<audio id="bgm" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_57a7c2db52.mp3">
+</audio>
+
+<script>
+const text = "Thank you so much for wishing me on my birthday 🎉\nYour message genuinely made my day.\nGrateful for you, always 💙";
+let i = 0;
+function typeEffect() {
+  if (i < text.length) {
+    document.getElementById("typing").innerHTML +=
+      text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
+    i++;
+    setTimeout(typeEffect, 50);
+  }
+}
+typeEffect();
+
+const birthday = new Date("January 5, 2026 00:00:00").getTime();
+setInterval(() => {
+  const now = new Date().getTime();
+  const diff = birthday - now;
+  if (diff > 0) {
+    const d = Math.floor(diff / (1000*60*60*24));
+    const h = Math.floor((diff/(1000*60*60))%24);
+    const m = Math.floor((diff/(1000*60))%60);
+    document.getElementById("countdown").innerHTML = `Countdown to Jan 5 → ${d}d ${h}h ${m}m`;
+  } else {
+    document.getElementById("countdown").innerHTML = "🎂 It's My Birthday Today 🎂";
+  }
+}, 1000);
+
+setTimeout(()=>confetti({particleCount:150, spread:100, origin:{y:0.6}}),2000);
+
+document.body.addEventListener("click",()=>{
+  const m=document.getElementById("bgm");
+  m.volume=0.15; m.play();
+},{once:true});
+
+const pageURL = window.location.href;
+document.getElementById("qrImg").src =
+  "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + encodeURIComponent(pageURL);
+</script>
+</body>
+</html>
